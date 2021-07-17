@@ -6,34 +6,26 @@ const { EnvironmentPlugin, ProvidePlugin } = require('webpack')
 module.exports = {
   mode: 'development',
   devtool: process.env.NODE_ENV === 'development' ? 'eval' : 'source-map', // no 'eval' outside of development
-  entry: './javascripts/index.js',
+  entry: './javascripts/index.ts',
   output: {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/dist'
+    publicPath: '/dist',
   },
   stats: 'errors-only',
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js', '.css', '.scss'],
+  },
   module: {
     rules: [
       {
-        test: /\.m?js$/,
-        exclude: /(node_modules)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            exclude: /node_modules\/lodash/,
-            presets: [
-              ['@babel/preset-env', { targets: '> 0.25%, not dead' }]
-            ],
-            plugins: [
-              '@babel/transform-runtime'
-            ]
-          }
-        }
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.s[ac]ss$/i,
@@ -43,45 +35,44 @@ module.exports = {
             loader: 'css-loader',
             options: {
               sourceMap: true,
-              url: false
-            }
+              url: false,
+            },
           },
           {
             // Needed to resolve image url()s within @primer/css
             loader: 'resolve-url-loader',
-            options: {}
+            options: {},
           },
           {
             loader: 'sass-loader',
             options: {
               sassOptions: {
+                quietDeps: true,
                 includePaths: ['./stylesheets', './node_modules'],
                 options: {
                   sourceMap: true,
-                  sourceMapContents: false
-                }
-              }
-            }
-          }
-        ]
-      }
-    ]
+                  sourceMapContents: false,
+                },
+              },
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'index.css'
+      filename: 'index.css',
     }),
     new CopyWebpackPlugin({
-      patterns: [
-        { from: 'node_modules/@primer/css/fonts', to: 'fonts' }
-      ]
+      patterns: [{ from: 'node_modules/@primer/css/fonts', to: 'fonts' }],
     }),
     new EnvironmentPlugin({
       NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
-      DEBUG: false
+      DEBUG: false,
     }),
     new ProvidePlugin({
-      process: 'process/browser'
-    })
-  ]
+      process: 'process/browser',
+    }),
+  ],
 }
