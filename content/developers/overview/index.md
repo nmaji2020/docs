@@ -1,17 +1,1 @@
----
-title: Overview
-intro: 'Learn about {% data variables.product.prodname_dotcom %}''s APIs{% ifversion ghes or ghae %} and secure your deployments.{% else %}, secure your deployments, and join {% data variables.product.prodname_dotcom %}''s Developer Program.{% endif %}'
-versions:
-  fpt: '*'
-  ghes: '*'
-  ghae: '*'
-children:
-  - /about-githubs-apis
-  - /managing-deploy-keys
-  - /viewing-deployment-history
-  - /using-ssh-agent-forwarding
-  - /secret-scanning-partner-program
-  - /replacing-github-services
-  - /github-developer-program
----
-
+NMAJI2020 / توسعه دهندگان عنوان: بررسی اجمالی: "در مورد {٪ متغیرهای داده ها. Apdardct.prodname_dotcom٪} APIS {٪ IFVersion GHES یا GAE٪} و امنیت خود را امن کنید. {٪ exse٪}، امنیت خود را امن و پیوستن به {٪ data متغیرهای. پخش کننده های نرم افزاری و نرم افزاری \ n = endif٪ '}' نسخه: FPT: '*' '' '' '' '' 'qual's's' '' * 'کودکان': - / gethits-aPIs - / مدیریت / -
